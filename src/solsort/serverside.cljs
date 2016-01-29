@@ -5,7 +5,6 @@
 (ns solsort.serverside
   (:require [cljs.core.async :refer  [>! <! chan put! take! timeout close! pipe]]))
 
-(js/console.log "hello world")
 (def page-cache (atom '()))
 
 ;; ## JavaScript function running within page in phantomjs
@@ -14,14 +13,13 @@
 (def phantom-function
   "function () {
   function done() {
-  onSolsortReady = undefined;
+  if (window.onSolsortReady) { 
+  window.onSolsortReady = undefined;
   window.callPhantom ({
   head: document.head.innerHTML,
   body: document.body.innerHTML});
-  }
-  if (window.solsortLoading) {
-  onSolsortReady = done;
-  } 
+  }}
+  window.onSolsortReady = done;
   setTimeout(done, 3000); 
   }")
 
@@ -55,7 +53,6 @@
                 page "onCallback"
                 (fn [data]
                   (when-not @sent
-                    (js/console.log "blah")
                     (reset! sent true)
                     (doto res
                       (.setHeader "Content-Type" "text/html")
