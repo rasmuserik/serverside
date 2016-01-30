@@ -45,7 +45,6 @@ Handle request, phantom-api is:
                   sent (atom false)
                   t0 (js/Date.now)
                   ]
-              (js/console.log url page)
               (.open 
                 page url
                 (fn [status]
