@@ -1,5 +1,4 @@
 #!/bin/bash -v
-npm install --dev
 killall java
 lein clean 
 lein cljsbuild auto &

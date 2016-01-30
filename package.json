@@ -1,7 +1,0 @@
-{
-  "name": "serverside",
-  "private": "true",
-  "dependencies": {
-    "phantomjs": "^1.9.19"
-  }
-}
